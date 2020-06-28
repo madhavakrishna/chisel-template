@@ -32,3 +32,23 @@ class GCD extends Module {
   io.outputGCD := x
   io.outputValid := y === 0.U
 }
+
+/**
+  * This generates verilog from chisel.
+  *
+  * To run from sbt
+  * {{{
+  * runMain gcd.GCDDriver
+  * }}}
+  *
+  * To run from sbt and see the options try
+  * {{{
+  * runMain gcd.GCDDriver --help
+  * }}}
+  */
+import chisel3.stage.{ChiselGeneratorAnnotation, ChiselStage}
+
+object GCDDriver extends App {
+  (new ChiselStage).execute(args, Seq(ChiselGeneratorAnnotation(() => new GCD)))
+}
+
